@@ -38,14 +38,13 @@ client.on("interactionCreate", async (interaction) => {
   };
 
   const command = client.commands.get(interaction.commandName);
-  const channel = client.channels.cache;
 
   if (!command) {
     return;
   };
 
   try {
-    await command.execute(interaction, channel);
+    await command.execute(interaction);
   } catch (error) {
     console.error(error);
     return interaction.reply({
