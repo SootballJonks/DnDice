@@ -1,5 +1,6 @@
 const { MessageActionRow, MessageSelectMenu } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const { diceRoll } = require("../DICE_LOGIC.js");
 
 /* "dice": Opens a discord bot menu where you can select the parameters for your dice roll. */
 
@@ -9,9 +10,22 @@ module.exports = {
     .setDescription(` Example: "/roll 3d6" , "/roll 1d10", etc.`)
     .addStringOption(option =>
       option
-        .setName("dicetype")
-        .setDescription("How many dice & how many faces? Eg. 3d10, 4d6 ...")
-        .setRequired(true)),
+        .setName("qty")
+        .setDescription("How many dice? (numbers only)")
+        .setRequired(true))
+    .addStringOption(option =>
+      option
+        .setName("sides")
+        .setDescription("How many sides? (numbers only)")
+        .setRequired(true))
+    .addStringOption(option =>
+      option
+        .setName("extra")
+        .setDescription("Do your dice explode? (Click an option above^^^)")
+        .setRequired(true)
+        .addChoice('Yes! Make em explode!', 'true')
+        .addChoice('No! Just normal dice!', 'false'))
+    ,
     
 
   async execute(interaction) {
@@ -19,30 +33,9 @@ module.exports = {
       return;
     }
 
-    const selectMenu = new MessageActionRow()
-      .addComponents(new MessageSelectMenu()
-      .setCustomId("explDice")
-      .setPlaceholder("Do your dice explode?")
-      .setMinValues(1)
-      .setMaxValues(1)
-      .addOptions([
-        {
-        label: "Yes! Make em explode!",
-        value: "true"
-        },
-        {
-          label: "No! Just normal dice!",
-          value: "false"
-        }]));
+    let options = interaction.options._hoistedOptions
 
-
-    console.log(interaction.options._hoistedOptions[0])
-
-
-    interaction.reply({
-      content: `Make a selection:`,
-      components: [selectMenu]
-    })
+    interaction.reply(diceRoll(options));
   },
 
 };
