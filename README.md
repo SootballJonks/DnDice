@@ -1,4 +1,4 @@
-# DnDice Roller
+# D&Dice Bot
 
 A Discord-bot for rolling dice. Choose your # of sides, # of dice, and whether or not you want the dice to explode (a mechanic found in many tabletop games).
 
