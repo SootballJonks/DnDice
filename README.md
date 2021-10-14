@@ -8,8 +8,8 @@ If you want to just upload this to your dev account and use it, here's what you'
 1. run npm install
 2. create a "config.json" file and put your keys like so:  
 {  
-  "token": "[YOUR TOKEN]",
-  "guildId": "[GUILD ID]",
+  "token": "[YOUR TOKEN]",  
+  "guildId": "[GUILD ID]",  
   "clientId": "[CLIENT ID]"  
 }
 3. host it somewhere?
